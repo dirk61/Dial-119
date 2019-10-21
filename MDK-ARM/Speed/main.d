@@ -27,5 +27,8 @@ speed\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 speed\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 speed\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 speed\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+speed\main.o: ../Inc/tim.h
+speed\main.o: ../Inc/usart.h
+speed\main.o: ../Inc/gpio.h
 speed\main.o: ../Inc/motor.h
 speed\main.o: C:\Users\64820\Apps\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
