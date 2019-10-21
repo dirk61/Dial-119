@@ -116,17 +116,17 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		__HAL_TIM_SET_COUNTER(&htim1,0);
-		HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_SET);
-		HAL_Delay(1);
-		HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
-		while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_SET);//wait for rising edge
-		tmp1=__HAL_TIM_GET_COUNTER(&htim1);
-		while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_RESET);//wait for falling edge
-		tmp2=__HAL_TIM_GET_COUNTER(&htim1);
-		tmp3=(tmp2>tmp1)?tmp2-tmp1:tmp2+0xffff-tmp1;//Avoid overflow
-		printf("us=%d	distance=%.2fcm\r\n",tmp3,tmp3*1.7/100.0);
-		HAL_Delay(1000);
+    __HAL_TIM_SET_COUNTER(&htim1,0);
+    HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_SET);
+    HAL_Delay(1);
+    HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
+    while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_SET);//wait for rising edge
+    tmp1=__HAL_TIM_GET_COUNTER(&htim1);
+    while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_RESET);//wait for falling edge
+    tmp2=__HAL_TIM_GET_COUNTER(&htim1);
+    tmp3=(tmp2>tmp1)?tmp2-tmp1:tmp2+0xffff-tmp1;//Avoid overflow
+    printf("us=%d	distance=%.2fcm\r\n",tmp3,tmp3*1.7/100.0);
+    HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
