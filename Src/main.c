@@ -56,8 +56,8 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 int fputc(int ch,FILE* f)
 {
-	HAL_UART_Transmit(&huart2,(uint8_t*)&ch,1,0xffff);
-	return ch;
+  HAL_UART_Transmit(&huart2,(uint8_t*)&ch,1,0xffff);
+  return ch;
 }
 /* USER CODE END PFP */
 
@@ -102,13 +102,13 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
-	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
   HAL_TIM_Base_Start_IT(&htim6);
   HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
-	HAL_TIM_Base_Start(&htim1);
-	int tmp1=0,tmp2=0,tmp3=0;
+  HAL_TIM_Base_Start(&htim1);
+  int tmp1=0,tmp2=0,tmp3=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -176,26 +176,26 @@ int duty = 999;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == htim6.Instance){
-		if(timer < 500)
-		{
-			++timer;			
-		}
-		else
-		{
-			timer = 0;
-			flag = 1 - flag;
-			if(flag == 1)
-			{
-				run_stright(1);
-				HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
-			}
-			else
-			{
-				run_stright(0);
-				HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
-			}
-		}
-	}
+    if(timer < 500)
+    {
+      ++timer;			
+    }
+    else
+    {
+      timer = 0;
+      flag = 1 - flag;
+      if(flag == 1)
+      {
+        run_stright(1);
+        HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
+      }
+      else
+      {
+        run_stright(0);
+        HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
+      }
+    }
+  }
 }
 /* USER CODE END 4 */
 
