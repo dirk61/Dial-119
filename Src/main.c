@@ -38,6 +38,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,7 +49,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t bt_buffer[1];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -100,6 +101,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM3_Init();
   MX_USART2_UART_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
@@ -109,24 +111,26 @@ int main(void)
   HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
   HAL_TIM_Base_Start(&htim1);
   int tmp1=0,tmp2=0,tmp3=0;
+	HAL_UART_Receive_IT(&huart1, (uint8_t *)&bt_buffer,1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		__HAL_TIM_SET_COUNTER(&htim1,0);
+		HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_SET);
+		HAL_Delay(1);
+		HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
+		while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_SET);//wait for rising edge
+		tmp1=__HAL_TIM_GET_COUNTER(&htim1);
+		while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_RESET);//wait for falling edge
+		tmp2=__HAL_TIM_GET_COUNTER(&htim1);
+		tmp3=(tmp2>tmp1)?tmp2-tmp1:tmp2+0xffff-tmp1;//Avoid overflow
+		printf("us=%d	distance=%.2fcm\r\n",tmp3,tmp3*1.7/100.0);
+		HAL_Delay(1000);
     /* USER CODE END WHILE */
-    __HAL_TIM_SET_COUNTER(&htim1,0);
-    HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_SET);
-    HAL_Delay(1);
-    HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
-    while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_SET);//wait for rising edge
-    tmp1=__HAL_TIM_GET_COUNTER(&htim1);
-    while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_RESET);//wait for falling edge
-    tmp2=__HAL_TIM_GET_COUNTER(&htim1);
-    tmp3=(tmp2>tmp1)?tmp2-tmp1:tmp2+0xffff-tmp1;//Avoid overflow
-    printf("us=%d	distance=%.2fcm\r\n",tmp3,tmp3*1.7/100.0);
-    HAL_Delay(1000);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -196,6 +200,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
       }
     }
   }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance == huart1.Instance)
+	{
+		const uint8_t enter_buffer[] = "\r\n";
+		while(HAL_UART_Transmit(huart, (uint8_t*)bt_buffer, 10, 0xffff)!= HAL_OK);
+		while(HAL_UART_Transmit(huart, (uint8_t*)enter_buffer, 2, 0xffff)!= HAL_OK);
+	}
 }
 /* USER CODE END 4 */
 
