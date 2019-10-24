@@ -56,7 +56,7 @@ extern uint8_t bt_buffer[];
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-UART_HandleTypeDef huart4;
+extern UART_HandleTypeDef huart4;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
