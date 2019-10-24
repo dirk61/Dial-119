@@ -80,20 +80,16 @@ void Error_Handler(void);
 #define LFN_GPIO_Port GPIOC
 #define LFP_Pin GPIO_PIN_9
 #define LFP_GPIO_Port GPIOC
-#define LED0_Pin GPIO_PIN_8
-#define LED0_GPIO_Port GPIOA
-#define BT_TX_Pin GPIO_PIN_9
-#define BT_TX_GPIO_Port GPIOA
-#define BT_RX_Pin GPIO_PIN_10
-#define BT_RX_GPIO_Port GPIOA
+#define LED1_Pin GPIO_PIN_8
+#define LED1_GPIO_Port GPIOA
 #define LFPWM_Pin GPIO_PIN_15
 #define LFPWM_GPIO_Port GPIOA
-#define LED1_Pin GPIO_PIN_2
-#define LED1_GPIO_Port GPIOD
-#define Trig_Pin GPIO_PIN_8
-#define Trig_GPIO_Port GPIOB
-#define Echo_Pin GPIO_PIN_9
-#define Echo_GPIO_Port GPIOB
+#define BT_TX_Pin GPIO_PIN_10
+#define BT_TX_GPIO_Port GPIOC
+#define BT_RX_Pin GPIO_PIN_11
+#define BT_RX_GPIO_Port GPIOC
+#define LED2_Pin GPIO_PIN_2
+#define LED2_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

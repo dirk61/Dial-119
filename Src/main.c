@@ -37,8 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,17 +48,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t bt_buffer[1];
+uint8_t bt_buffer[10];
+extern UART_HandleTypeDef huart4;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-int fputc(int ch,FILE* f)
-{
-  HAL_UART_Transmit(&huart2,(uint8_t*)&ch,1,0xffff);
-  return ch;
-}
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -97,38 +93,17 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM2_Init();
-  MX_TIM6_Init();
-  MX_TIM1_Init();
   MX_TIM3_Init();
-  MX_USART2_UART_Init();
-  MX_USART1_UART_Init();
+  MX_UART4_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
-  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
-  HAL_TIM_Base_Start_IT(&htim6);
-  HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
-  HAL_TIM_Base_Start(&htim1);
-  int tmp1=0,tmp2=0,tmp3=0;
-	HAL_UART_Receive_IT(&huart1, (uint8_t *)&bt_buffer,1);
+	HAL_UART_Receive_IT(&huart4, (uint8_t *)&bt_buffer, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		__HAL_TIM_SET_COUNTER(&htim1,0);
-		HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_SET);
-		HAL_Delay(1);
-		HAL_GPIO_WritePin(Trig_GPIO_Port,Trig_Pin,GPIO_PIN_RESET);
-		while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_SET);//wait for rising edge
-		tmp1=__HAL_TIM_GET_COUNTER(&htim1);
-		while(HAL_GPIO_ReadPin(Echo_GPIO_Port,Echo_Pin)!=GPIO_PIN_RESET);//wait for falling edge
-		tmp2=__HAL_TIM_GET_COUNTER(&htim1);
-		tmp3=(tmp2>tmp1)?tmp2-tmp1:tmp2+0xffff-tmp1;//Avoid overflow
-		printf("us=%d	distance=%.2fcm\r\n",tmp3,tmp3*1.7/100.0);
-		HAL_Delay(1000);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -174,42 +149,8 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-int timer = 0;
-int flag = 0;
-int duty = 999;
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if(htim->Instance == htim6.Instance){
-    if(timer < 500)
-    {
-      ++timer;			
-    }
-    else
-    {
-      timer = 0;
-      flag = 1 - flag;
-      if(flag == 1)
-      {
-        run_stright(1);
-        HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_RESET);
-      }
-      else
-      {
-        run_stright(0);
-        HAL_GPIO_WritePin(LED1_GPIO_Port,LED1_Pin,GPIO_PIN_SET);
-      }
-    }
-  }
-}
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	if(huart->Instance == huart1.Instance)
-	{
-		const uint8_t enter_buffer[] = "\r\n";
-		while(HAL_UART_Transmit(huart, (uint8_t*)bt_buffer, 10, 0xffff)!= HAL_OK);
-		while(HAL_UART_Transmit(huart, (uint8_t*)enter_buffer, 2, 0xffff)!= HAL_OK);
-	}
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	while(HAL_UART_Transmit(huart, (uint8_t*)bt_buffer, 1, 0xffff)!= HAL_OK);
 }
 /* USER CODE END 4 */
 
