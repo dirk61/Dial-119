@@ -1,7 +1,7 @@
 Dependencies for Project 'Speed', Target 'Speed': (DO NOT MODIFY !)
 F (startup_stm32f103xe.s)(0x5DB1BCBC)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include--pd "__UVISION_VERSION SETA 528" --pd "_RTE_ SETA 1"--list startup_stm32f103xe.lst --xref -o speed\startup_stm32f103xe.o --depend speed\startup_stm32f103xe.d)
-F (..\Src\motor.c)(0x5DACF852)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include-D__UVISION_VERSION="528" -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE -DUSE_HAL_DRIVER -DSTM32F103xE-o speed\motor.o --omf_browse speed\motor.crf --depend speed\motor.d)
-I (../Inc/motor.h)(0x5DACF7EC)
+F (..\Src\motor.c)(0x5DBD3D13)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include-D__UVISION_VERSION="528" -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE -DUSE_HAL_DRIVER -DSTM32F103xE-o speed\motor.o --omf_browse speed\motor.crf --depend speed\motor.d)
+I (../Inc/motor.h)(0x5DBD3D28)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5D10A068)
 I (../Inc/stm32f1xx_hal_conf.h)(0x5DB1BCBA)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x5D10A074)
@@ -29,7 +29,8 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x5D10A07F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x5D10A07F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5D10A082)
 I (../Inc/main.h)(0x5DB1BCBA)
-F (../Src/main.c)(0x5DB1BEC4)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include-D__UVISION_VERSION="528" -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE -DUSE_HAL_DRIVER -DSTM32F103xE-o speed\main.o --omf_browse speed\main.crf --depend speed\main.d)
+I (../Inc/tim.h)(0x5DB1BCBA)
+F (../Src/main.c)(0x5DBD42C9)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include-D__UVISION_VERSION="528" -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE -DUSE_HAL_DRIVER -DSTM32F103xE-o speed\main.o --omf_browse speed\main.crf --depend speed\main.d)
 I (../Inc/main.h)(0x5DB1BCBA)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5D10A068)
 I (../Inc/stm32f1xx_hal_conf.h)(0x5DB1BCBA)
@@ -60,7 +61,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5D10A082)
 I (../Inc/tim.h)(0x5DB1BCBA)
 I (../Inc/usart.h)(0x5DB1BCBA)
 I (../Inc/gpio.h)(0x5DB1BCB9)
-I (../Inc/motor.h)(0x5DACF7EC)
+I (../Inc/motor.h)(0x5DBD3D28)
 I (C:\Users\64820\Apps\Keil5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 F (../Src/gpio.c)(0x5DB1BCB9)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include-D__UVISION_VERSION="528" -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE -DUSE_HAL_DRIVER -DSTM32F103xE-o speed\gpio.o --omf_browse speed\gpio.crf --depend speed\gpio.d)
 I (../Inc/gpio.h)(0x5DB1BCB9)
@@ -149,7 +150,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x5D10A072)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x5D10A07F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x5D10A07F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x5D10A082)
-F (../Src/stm32f1xx_it.c)(0x5DB1BFCF)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include-D__UVISION_VERSION="528" -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE -DUSE_HAL_DRIVER -DSTM32F103xE-o speed\stm32f1xx_it.o --omf_browse speed\stm32f1xx_it.crf --depend speed\stm32f1xx_it.d)
+F (../Src/stm32f1xx_it.c)(0x5DBD23EF)(--c99 -c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_Speed-IC:\Users\64820\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IDevice\Include-D__UVISION_VERSION="528" -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE -DUSE_HAL_DRIVER -DSTM32F103xE-o speed\stm32f1xx_it.o --omf_browse speed\stm32f1xx_it.crf --depend speed\stm32f1xx_it.d)
 I (../Inc/main.h)(0x5DB1BCBA)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x5D10A068)
 I (../Inc/stm32f1xx_hal_conf.h)(0x5DB1BCBA)

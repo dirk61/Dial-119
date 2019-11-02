@@ -1,7 +1,8 @@
 #include "motor.h"
 #include "main.h"
-void adjust_wheel(int wheel, int if_forward)
-{
+#include "tim.h"
+void adjust_wheel(int wheel, int if_forward,int _speed)
+{	
 	if(if_forward==0)	//go back
 	{
 		switch(wheel)				 
@@ -10,21 +11,25 @@ void adjust_wheel(int wheel, int if_forward)
 			{
 				HAL_GPIO_WritePin(RFN_GPIO_Port,RFN_Pin,GPIO_PIN_SET);
 				HAL_GPIO_WritePin(RFP_GPIO_Port,RFP_Pin,GPIO_PIN_RESET);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,_speed);
 			}break;
 			case 2:
 			{
 				HAL_GPIO_WritePin(LFN_GPIO_Port,LFN_Pin,GPIO_PIN_SET);
 				HAL_GPIO_WritePin(LFP_GPIO_Port,LFP_Pin,GPIO_PIN_RESET);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,_speed);
 			}break;
 			case 3:
 			{
 				HAL_GPIO_WritePin(RRN_GPIO_Port,RRN_Pin,GPIO_PIN_SET);
 				HAL_GPIO_WritePin(RRP_GPIO_Port,RRP_Pin,GPIO_PIN_RESET);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,_speed);
 			}break;
 			case 4:
 			{
 				HAL_GPIO_WritePin(LRN_GPIO_Port,LRN_Pin,GPIO_PIN_SET);
 				HAL_GPIO_WritePin(LRP_GPIO_Port,LRP_Pin,GPIO_PIN_RESET);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,_speed);
 			}break;
 			default: break;
 		}
@@ -37,21 +42,25 @@ void adjust_wheel(int wheel, int if_forward)
 			{
 				HAL_GPIO_WritePin(RFN_GPIO_Port,RFN_Pin,GPIO_PIN_RESET);
 				HAL_GPIO_WritePin(RFP_GPIO_Port,RFP_Pin,GPIO_PIN_SET);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,_speed);
 			}break;
 			case 2:
 			{
 				HAL_GPIO_WritePin(LFN_GPIO_Port,LFN_Pin,GPIO_PIN_RESET);
 				HAL_GPIO_WritePin(LFP_GPIO_Port,LFP_Pin,GPIO_PIN_SET);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,_speed);
 			}break;
 			case 3:
 			{
 				HAL_GPIO_WritePin(RRN_GPIO_Port,RRN_Pin,GPIO_PIN_RESET);
 				HAL_GPIO_WritePin(RRP_GPIO_Port,RRP_Pin,GPIO_PIN_SET);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,_speed);
 			}break;
 			case 4:
 			{
 				HAL_GPIO_WritePin(LRN_GPIO_Port,LRN_Pin,GPIO_PIN_RESET);
 				HAL_GPIO_WritePin(LRP_GPIO_Port,LRP_Pin,GPIO_PIN_SET);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,_speed);
 			}break;
 			default: break;
 		}
@@ -85,29 +94,16 @@ void adjust_wheel(int wheel, int if_forward)
 	}
 }
 
-void run_stright(int direction)
-{
-	adjust_wheel(1,direction);
-	adjust_wheel(2,direction);
-	adjust_wheel(3,direction);
-	adjust_wheel(4,direction);
+void run_stright(int direction,int _speed){
+	adjust_wheel(1,direction,_speed);
+	adjust_wheel(2,direction,_speed);
+	adjust_wheel(3,direction,_speed);
+	adjust_wheel(4,direction,_speed);
 }
 
-
-void turn(int direction)
-{
-	if(direction)
-	{
-		adjust_wheel(1,0);
-		adjust_wheel(2,1);
-		adjust_wheel(3,0);
-		adjust_wheel(4,1);
-	}
-	else
-	{
-		adjust_wheel(1,1);
-		adjust_wheel(2,0);
-		adjust_wheel(3,1);
-		adjust_wheel(4,0);
-	}
+void turn_around(int direction,int _speed){
+	adjust_wheel(1,4-direction,_speed);
+	adjust_wheel(2,direction-3,_speed);
+	adjust_wheel(3,4-direction,_speed);
+	adjust_wheel(4,direction-3,_speed);
 }

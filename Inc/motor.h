@@ -10,7 +10,7 @@ Parameters:
 wheel (1~4) : RightFront,LeftFront,RightRear,LeftRear
 if_forward (1 or 0) : 1 go forward, 0 go back
 */
-void adjust_wheel(int wheel, int if_forward);
+void adjust_wheel(int wheel, int if_forward, int _speed);
 /*
 turn right or left
 1 means right
@@ -22,5 +22,6 @@ direction 1:forward;
 direction 0:backward;
 direction 2:stop;
 */
-void run_stright(int direction);
+void run_stright(int direction,int _speed);
+void turn_around(int direction,int _speed);
 #endif

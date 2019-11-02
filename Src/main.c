@@ -96,7 +96,14 @@ int main(void)
   MX_TIM3_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
-	HAL_UART_Receive_IT(&huart4, (uint8_t *)&bt_buffer, 1);
+	HAL_UART_Receive_IT(&huart4, (uint8_t *)&bt_buffer, 2);
+	HAL_TIM_Base_Start(&htim2);
+	HAL_TIM_Base_Start(&htim3);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1); //RR
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3); //RF
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3); //LR
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);  //LF
+	run_stright(1,8*100);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -105,7 +112,7 @@ int main(void)
   {
 
     /* USER CODE END WHILE */
-
+		
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -150,11 +157,23 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	while(HAL_UART_Transmit(huart, (uint8_t*)bt_buffer, 1, 0xffff)!= HAL_OK);
+	/*
+	if(bt_buffer[0]>2){
+		turn_around(bt_buffer[0],bt_buffer[1]*100);
+	}
+	else{
+		run_stright(bt_buffer[0],bt_buffer[1]*100);
+	}*/
+	if(bt_buffer[0]-48>2) turn_around(bt_buffer[0]-48,bt_buffer[1]-48);
+	else run_stright(bt_buffer[0]-48,(bt_buffer[1]-48)*100);
+	uint8_t test[]="got it";
+	HAL_UART_Transmit(huart,test,sizeof(test),0xffff);
 }
 /* USER CODE END 4 */
 
-/**
+
+
+/*
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
